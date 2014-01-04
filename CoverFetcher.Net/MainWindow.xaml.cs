@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoverFetcher.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,27 +14,25 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CoverFetcher.Net
+namespace CoverFetcher
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
 
         private void Grid_Drop(object sender, DragEventArgs e)
         {
             string filename = (string)((DataObject)e.Data).GetFileDropList()[0];
 
-            TagLib.File file = TagLib.File.Create(filename);
-            string artist = file.Tag.FirstPerformer;
-            string albumArtist = file.Tag.FirstAlbumArtist;
-            string title = file.Tag.Title;
-            string album = file.Tag.Album;
+            ((MainViewModel)DataContext).FilePath = filename;
         }
     }
 }
