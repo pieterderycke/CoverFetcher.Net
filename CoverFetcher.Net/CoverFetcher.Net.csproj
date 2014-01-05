@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ByteArrayFileAbstraction.cs" />
     <Compile Include="ItunesRepository.cs" />
     <Compile Include="SearchResult.cs" />
     <Compile Include="SearchResultItem.cs" />

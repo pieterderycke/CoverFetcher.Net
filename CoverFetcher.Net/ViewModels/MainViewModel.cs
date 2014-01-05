@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,9 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace CoverFetcher.ViewModels
@@ -21,6 +24,7 @@ namespace CoverFetcher.ViewModels
         public MainViewModel ()
 	    {
             itunesRepository = new ItunesRepository();
+            Save = new RelayCommand(UpdateTags);
 	    }
 
         private string artist;
@@ -47,6 +51,7 @@ namespace CoverFetcher.ViewModels
         private string genre;
         public string Genre { get { return genre; } set { genre = value; RaisePropertyChanged("Genre"); } }
 
+        private byte[] coverImageBytes;
         private BitmapImage cover;
         public BitmapImage Cover { get { return cover; } set { cover = value; RaisePropertyChanged("Cover"); } }
 
@@ -60,6 +65,8 @@ namespace CoverFetcher.ViewModels
             }
         }
 
+        public ICommand Save { get; private set; }
+
         private void ReadTags()
         {
             TagLib.File file = TagLib.File.Create(filePath);
@@ -72,13 +79,59 @@ namespace CoverFetcher.ViewModels
             Year = "" + file.Tag.Year;
             Genre = file.Tag.FirstGenre;
             Cover = null;
+            file.Dispose();
 
             itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist, 
                 string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
                 {
+                    coverImageBytes = task.Result;
+
                     // Execute on UI Thread
-                    Application.Current.Dispatcher.Invoke((Action)(() => { Cover = task.Result; }));
+                    Application.Current.Dispatcher.Invoke((Action)(() => 
+                    {
+                        BitmapImage coverImage = (coverImageBytes != null) ? LoadImage(coverImageBytes) : null;
+                        Cover = coverImage; 
+                    }));
                 });
+        }
+
+        private BitmapImage LoadImage(byte[] data)
+        {
+            MemoryStream memoryStream = new MemoryStream(data);
+            BitmapImage image = new BitmapImage();
+
+            image.BeginInit();
+            image.StreamSource = memoryStream;
+            image.EndInit();
+
+            return image;
+        }
+
+        private void UpdateTags()
+        {
+            TagLib.File file = TagLib.File.Create(filePath);
+
+            if (coverImageBytes != null)
+            {
+                TagLib.Picture picture = new TagLib.Picture(new ByteArrayFileAbstraction("test", coverImageBytes));
+                TagLib.Id3v2.AttachedPictureFrame coverPictureFrame = new TagLib.Id3v2.AttachedPictureFrame(picture);
+                coverPictureFrame.MimeType = MediaTypeNames.Image.Jpeg;
+                coverPictureFrame.Type = TagLib.PictureType.FrontCover;
+                file.Tag.Pictures = new TagLib.IPicture[] { coverPictureFrame };
+            }
+            else 
+            {
+                file.Tag.Pictures = new TagLib.IPicture[0];
+            }
+
+            file.Tag.Performers = new string[] { Artist };
+            file.Tag.Title = Title;
+            file.Tag.AlbumArtists = new string[] { AlbumArtist };
+            file.Tag.Album = Album;
+            file.Tag.Genres = new string[] { Genre };
+
+            file.Save();
+            file.Dispose();
         }
     }
 }
