@@ -1,14 +1,28 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace CoverFetcher.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private readonly ItunesRepository itunesRepository;
+
+        public MainViewModel ()
+	    {
+            itunesRepository = new ItunesRepository();
+	    }
+
         private string artist;
         public string Artist { get { return artist; } set { artist = value; RaisePropertyChanged("Artist"); } }
 
@@ -33,6 +47,9 @@ namespace CoverFetcher.ViewModels
         private string genre;
         public string Genre { get { return genre; } set { genre = value; RaisePropertyChanged("Genre"); } }
 
+        private BitmapImage cover;
+        public BitmapImage Cover { get { return cover; } set { cover = value; RaisePropertyChanged("Cover"); } }
+
         private string filePath;
         public string FilePath 
         { 
@@ -54,6 +71,14 @@ namespace CoverFetcher.ViewModels
             Disc = "" + file.Tag.Disc;
             Year = "" + file.Tag.Year;
             Genre = file.Tag.FirstGenre;
+            Cover = null;
+
+            itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist, 
+                string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
+                {
+                    // Execute on UI Thread
+                    Application.Current.Dispatcher.Invoke((Action)(() => { Cover = task.Result; }));
+                });
         }
     }
 }
