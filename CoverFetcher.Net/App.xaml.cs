@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CoverFetcher.Messages;
+using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +15,17 @@ namespace CoverFetcher
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Messenger.Default.Register<ShowErrorMessage>(this, OnShowErrorMessageReceived);
+        }
+
+        private void OnShowErrorMessageReceived(ShowErrorMessage message)
+        {
+            Application.Current.Dispatcher.Invoke((Action)(() =>
+            {
+                MessageBox.Show(this.MainWindow, message.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }));
+        }
     }
 }

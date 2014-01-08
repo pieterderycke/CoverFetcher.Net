@@ -28,20 +28,27 @@ namespace CoverFetcher
 
         public async Task<byte[]> FindCover(string artist, string album)
         {
-            string url = string.Format("https://itunes.apple.com/search?entity=album&term={0}",
-                Uri.EscapeDataString(artist + " " + album));
-
-            HttpResponseMessage response = await client.GetAsync(url);
-            SearchResult result = await response.Content.ReadAsAsync<SearchResult>(formatters);
-
-            if (result.ResultCount > 0)
+            try
             {
-                string imageUrl = result.Items.First().ArtworkUrl600;
-                return await client.GetByteArrayAsync(imageUrl);
+                string url = string.Format("https://itunes.apple.com/search?entity=album&term={0}",
+                    Uri.EscapeDataString(artist + " " + album));
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                SearchResult result = await response.Content.ReadAsAsync<SearchResult>(formatters);
+
+                if (result.ResultCount > 0)
+                {
+                    string imageUrl = result.Items.First().ArtworkUrl600;
+                    return await client.GetByteArrayAsync(imageUrl);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(HttpRequestException ex)
             {
-                return null;
+                throw new Exception("Unable to connect to the Apple Itunes REST service. Please unsure an internet connection is available.", ex);
             }
         }
     }

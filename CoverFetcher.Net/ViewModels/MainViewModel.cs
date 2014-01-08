@@ -1,5 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CoverFetcher.Messages;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,6 +28,7 @@ namespace CoverFetcher.ViewModels
 	    {
             itunesRepository = new ItunesRepository();
             Save = new RelayCommand(UpdateTags);
+            SaveCover = new RelayCommand(WriteCoverToFile);
 	    }
 
         private string artist;
@@ -66,33 +70,52 @@ namespace CoverFetcher.ViewModels
         }
 
         public ICommand Save { get; private set; }
+        public ICommand SaveCover { get; private set; }
 
         private void ReadTags()
         {
-            TagLib.File file = TagLib.File.Create(filePath);
-            Artist = file.Tag.FirstPerformer;
-            Title = file.Tag.Title;
-            AlbumArtist = file.Tag.FirstAlbumArtist;
-            Album = file.Tag.Album;
-            Track = "" + file.Tag.Track;
-            Disc = "" + file.Tag.Disc;
-            Year = "" + file.Tag.Year;
-            Genre = file.Tag.FirstGenre;
-            Cover = null;
-            file.Dispose();
+            try
+            {
+                TagLib.File file = TagLib.File.Create(filePath);
+                Artist = file.Tag.FirstPerformer;
+                Title = file.Tag.Title;
+                AlbumArtist = file.Tag.FirstAlbumArtist;
+                Album = file.Tag.Album;
+                Track = "" + file.Tag.Track;
+                Disc = "" + file.Tag.Disc;
+                Year = "" + file.Tag.Year;
+                Genre = file.Tag.FirstGenre;
+                Cover = null;
+                file.Dispose();
 
-            itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist, 
-                string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
-                {
-                    coverImageBytes = task.Result;
-
-                    // Execute on UI Thread
-                    Application.Current.Dispatcher.Invoke((Action)(() => 
+                itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist,
+                    string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
                     {
-                        BitmapImage coverImage = (coverImageBytes != null) ? LoadImage(coverImageBytes) : null;
-                        Cover = coverImage; 
-                    }));
-                });
+                        try
+                        {
+                            coverImageBytes = task.Result;
+
+                            // Execute on UI Thread
+                            Application.Current.Dispatcher.Invoke((Action)(() =>
+                            {
+                                BitmapImage coverImage = (coverImageBytes != null) ? LoadImage(coverImageBytes) : null;
+                                Cover = coverImage;
+                            }));
+                        }
+                        catch(AggregateException ex)
+                        {
+                            SendErrorMessage(ex.InnerException.Message);
+                        }
+                        catch(Exception ex)
+                        {
+                            SendErrorMessage(ex.Message);
+                        }
+                    });
+            }
+            catch(Exception ex)
+            {
+                SendErrorMessage(ex.Message);
+            }
         }
 
         private BitmapImage LoadImage(byte[] data)
@@ -132,6 +155,25 @@ namespace CoverFetcher.ViewModels
 
             file.Save();
             file.Dispose();
+        }
+
+        private void WriteCoverToFile()
+        {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.DefaultExt = ".jpg";
+            dialog.Filter = "JPEG (.jpg)|*.jpg";
+            dialog.FileName = string.Format("{0} - {1}.jpg", AlbumArtist, Album);
+            if (dialog.ShowDialog() == true)
+            {
+                string filename = dialog.FileName;
+
+                File.WriteAllBytes(filename, coverImageBytes);
+            }
+        }
+
+        private void SendErrorMessage(string message)
+        {
+            Messenger.Default.Send(new ShowErrorMessage() { Message = message });
         }
     }
 }

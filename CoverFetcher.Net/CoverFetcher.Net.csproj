@@ -82,6 +82,7 @@
     </ApplicationDefinition>
     <Compile Include="ByteArrayFileAbstraction.cs" />
     <Compile Include="ItunesRepository.cs" />
+    <Compile Include="Messages\ShowErrorMessage.cs" />
     <Compile Include="SearchResult.cs" />
     <Compile Include="SearchResultItem.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -128,6 +129,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\drop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
