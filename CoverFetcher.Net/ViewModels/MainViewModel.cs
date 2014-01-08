@@ -27,7 +27,9 @@ namespace CoverFetcher.ViewModels
         public MainViewModel ()
 	    {
             itunesRepository = new ItunesRepository();
+            Refresh = new RelayCommand(LoadCover);
             Save = new RelayCommand(UpdateTags);
+            Cancel = new RelayCommand(ReadTags);
             SaveCover = new RelayCommand(WriteCoverToFile);
 	    }
 
@@ -69,7 +71,9 @@ namespace CoverFetcher.ViewModels
             }
         }
 
+        public ICommand Refresh { get; private set; }
         public ICommand Save { get; private set; }
+        public ICommand Cancel { get; private set; }
         public ICommand SaveCover { get; private set; }
 
         private void ReadTags()
@@ -88,6 +92,18 @@ namespace CoverFetcher.ViewModels
                 Cover = null;
                 file.Dispose();
 
+                LoadCover();
+            }
+            catch(Exception ex)
+            {
+                SendErrorMessage(ex.Message);
+            }
+        }
+
+        private void LoadCover()
+        {
+            try
+            {
                 itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist,
                     string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
                     {
@@ -102,17 +118,17 @@ namespace CoverFetcher.ViewModels
                                 Cover = coverImage;
                             }));
                         }
-                        catch(AggregateException ex)
+                        catch (AggregateException ex)
                         {
                             SendErrorMessage(ex.InnerException.Message);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             SendErrorMessage(ex.Message);
                         }
                     });
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SendErrorMessage(ex.Message);
             }
@@ -132,29 +148,36 @@ namespace CoverFetcher.ViewModels
 
         private void UpdateTags()
         {
-            TagLib.File file = TagLib.File.Create(filePath);
-
-            if (coverImageBytes != null)
+            try
             {
-                TagLib.Picture picture = new TagLib.Picture(new ByteArrayFileAbstraction("test", coverImageBytes));
-                TagLib.Id3v2.AttachedPictureFrame coverPictureFrame = new TagLib.Id3v2.AttachedPictureFrame(picture);
-                coverPictureFrame.MimeType = MediaTypeNames.Image.Jpeg;
-                coverPictureFrame.Type = TagLib.PictureType.FrontCover;
-                file.Tag.Pictures = new TagLib.IPicture[] { coverPictureFrame };
+                TagLib.File file = TagLib.File.Create(filePath);
+
+                if (coverImageBytes != null)
+                {
+                    TagLib.Picture picture = new TagLib.Picture(new ByteArrayFileAbstraction("test", coverImageBytes));
+                    TagLib.Id3v2.AttachedPictureFrame coverPictureFrame = new TagLib.Id3v2.AttachedPictureFrame(picture);
+                    coverPictureFrame.MimeType = MediaTypeNames.Image.Jpeg;
+                    coverPictureFrame.Type = TagLib.PictureType.FrontCover;
+                    file.Tag.Pictures = new TagLib.IPicture[] { coverPictureFrame };
+                }
+                else
+                {
+                    file.Tag.Pictures = new TagLib.IPicture[0];
+                }
+
+                file.Tag.Performers = new string[] { Artist };
+                file.Tag.Title = Title;
+                file.Tag.AlbumArtists = new string[] { AlbumArtist };
+                file.Tag.Album = Album;
+                file.Tag.Genres = new string[] { Genre };
+
+                file.Save();
+                file.Dispose();
             }
-            else 
+            catch (Exception ex)
             {
-                file.Tag.Pictures = new TagLib.IPicture[0];
+                SendErrorMessage(ex.Message);
             }
-
-            file.Tag.Performers = new string[] { Artist };
-            file.Tag.Title = Title;
-            file.Tag.AlbumArtists = new string[] { AlbumArtist };
-            file.Tag.Album = Album;
-            file.Tag.Genres = new string[] { Genre };
-
-            file.Save();
-            file.Dispose();
         }
 
         private void WriteCoverToFile()

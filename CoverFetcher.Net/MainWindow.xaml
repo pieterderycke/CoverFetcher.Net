@@ -25,7 +25,7 @@
             </Image.ContextMenu>
         </Image>
 
-        <Button Content="Cancel" Grid.Column="2" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+        <Button Content="Cancel" Grid.Column="2" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Command="{Binding Cancel}"/>
         <Button Content="Save" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,90,10" Width="75" RenderTransformOrigin="-0.093,-0.05" Height="20" VerticalAlignment="Bottom" Command="{Binding Save}"/>
 
         <!-- Drop Zone -->
@@ -41,10 +41,10 @@
         <TextBox Height="23" Margin="91,119,0,0" TextWrapping="Wrap" Text="{Binding Artist, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Content="Title" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top"/>
         <TextBox Height="23" Margin="91,150,0,0" TextWrapping="Wrap" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-        
+
         <Label Content="Album Artist" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top"/>
         <TextBox Grid.ColumnSpan="2" Height="23" Margin="91,181,0,0" TextWrapping="Wrap" Text="{Binding AlbumArtist, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-        
+
         <Label Content="Album" HorizontalAlignment="Left" Margin="10,208,0,0" VerticalAlignment="Top"/>
         <TextBox Height="23" Margin="91,212,0,0" TextWrapping="Wrap" Text="{Binding Album, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <Label Content="Track" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top"/>
@@ -55,5 +55,6 @@
         <TextBox Height="23" Margin="60,274,0,0" TextWrapping="Wrap" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <Label Content="Genre" Grid.Column="1" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top"/>
         <ComboBox Grid.Column="1" Margin="57,274,0,0" VerticalAlignment="Top" Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"/>
+        <Button Content="Refresh" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding Refresh}"/>
     </Grid>
 </Window>
