@@ -4,7 +4,8 @@
         Title="CoverFetcher.Net" 
         Height="390" MinHeight="390" MaxHeight="390"
         Width="700" MinWidth="600" 
-        AllowDrop="True">
+        AllowDrop="True"
+        Icon="Assets/Icon.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="50*"/>
