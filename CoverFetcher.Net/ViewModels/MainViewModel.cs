@@ -169,7 +169,11 @@ namespace CoverFetcher.ViewModels
                 file.Tag.Title = Title;
                 file.Tag.AlbumArtists = new string[] { AlbumArtist };
                 file.Tag.Album = Album;
-                file.Tag.Genres = new string[] { Genre };
+
+                if (Genre != null)
+                    file.Tag.Genres = new string[] { Genre };
+
+                file.Tag.Year = uint.Parse(Year);
 
                 file.Save();
                 file.Dispose();
@@ -185,7 +189,7 @@ namespace CoverFetcher.ViewModels
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.DefaultExt = ".jpg";
             dialog.Filter = "JPEG (.jpg)|*.jpg";
-            dialog.FileName = string.Format("{0} - {1}.jpg", AlbumArtist, Album);
+            dialog.FileName = string.Format("{0} - {1}.jpg", (AlbumArtist != null) ? AlbumArtist : Artist, Album);
             if (dialog.ShowDialog() == true)
             {
                 string filename = dialog.FileName;

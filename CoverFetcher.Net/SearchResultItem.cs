@@ -17,7 +17,7 @@ namespace CoverFetcher
         { 
             get 
             {
-                return ArtworkUrl100.Substring(0, ArtworkUrl100.Length - ".100x100-75.jpg".Length) + ".600x600-75.jpg";
+                return ArtworkUrl100.Substring(0, ArtworkUrl100.Length - "100x100bb.jpg".Length) + "600x600bb.jpg";
             } 
         }
     }
