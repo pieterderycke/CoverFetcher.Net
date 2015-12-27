@@ -189,7 +189,7 @@ namespace CoverFetcher.ViewModels
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.DefaultExt = ".jpg";
             dialog.Filter = "JPEG (.jpg)|*.jpg";
-            dialog.FileName = string.Format("{0} - {1}.jpg", (AlbumArtist != null) ? AlbumArtist : Artist, Album);
+            dialog.FileName = string.Format("{0} - {1}.jpg", (AlbumArtist != null) ? AlbumArtist : Artist, (Album != null) ? Album : Title);
             if (dialog.ShowDialog() == true)
             {
                 string filename = dialog.FileName;

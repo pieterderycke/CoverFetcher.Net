@@ -34,7 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight.Extras.WPF45">
@@ -140,10 +141,15 @@
     <Resource Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icon.ico" />
+    <Resource Include="Assets\icon-16.png" />
+    <Resource Include="Assets\icon-24.png" />
+    <Resource Include="Assets\icon-256.png" />
+    <Resource Include="Assets\icon-32.png" />
+    <Resource Include="Assets\icon-48.png" />
+    <Resource Include="Assets\icon-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\Icon.png" />
+    <Resource Include="Assets\Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
