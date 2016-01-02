@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="INSTALLFOLDER" />
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="ProductComponents">
+            <Component Id="cmpD4375B48D68E086C5190F36A98861599" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil45D8A2250997F31AFC5A9D53C63364FB" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.exe" />
+            </Component>
+            <Component Id="cmpE8F56E70D5D1CEBCE693E4B7DD179950" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filBD06E9B8AD6D290FE1E957573D28B1A0" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.exe.config" />
+            </Component>
+            <Component Id="cmp7A415C345663101DFE5E88C68512B201" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filB94CE8450BB4B847DDF1E71B33F7B3DC" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.Net.vshost.exe.config" />
+            </Component>
+            <Component Id="cmpBA8C425D51E97C962AC1C1C90C022AF2" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil41D521F2F2776BAEFBA011496E6E5E77" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.pdb" />
+            </Component>
+            <Component Id="cmp9EC2CC7B54A62F87078E631ECFDB0EC6" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil1623378DF44C5D6125439C4C20A5534C" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.vshost.exe" />
+            </Component>
+            <Component Id="cmpE61D0685C837007CB4EEA183765F1C25" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil1F4EDC5A94C14D9D27823C1EA39E1E31" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.vshost.exe.config" />
+            </Component>
+            <Component Id="cmp79DCF95F2D983C0162825BDDA89C93D0" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF394A348FBF13AB97F0AE02619A8D883" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\CoverFetcher.vshost.exe.manifest" />
+            </Component>
+            <Component Id="cmp101BF48B7BE15E7D10BC506659753DE8" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filA16578295B8D3E6FB44EE2B0360A1A14" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\GalaSoft.MvvmLight.Extras.WPF45.dll" />
+            </Component>
+            <Component Id="cmp95F4DACDDED20D0D9AAFA8AF2D52B302" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil97B55FF4B88A81A009D8B91AB0B40A8E" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\GalaSoft.MvvmLight.Extras.WPF45.pdb" />
+            </Component>
+            <Component Id="cmp1877FDD04C8364232310739B70C13C74" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filDFFFE209AF1E69D52B32789775377D39" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\GalaSoft.MvvmLight.Extras.WPF45.xml" />
+            </Component>
+            <Component Id="cmp0E23B54FF158B05E38B9A0E213C02CF8" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil65852679B69F58AA351C2F31BE208915" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\GalaSoft.MvvmLight.WPF45.dll" />
+            </Component>
+            <Component Id="cmp26CCE7B9BA202EBDF8B05D01DC78B2BE" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil968B2E7E0560E8E2781555AC8CEC1E73" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\GalaSoft.MvvmLight.WPF45.pdb" />
+            </Component>
+            <Component Id="cmp117611AACB2A7E07186624B505B2B1E5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3A0CF8456FCF73C61F33341DFD9DDF7B" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\GalaSoft.MvvmLight.WPF45.xml" />
+            </Component>
+            <Component Id="cmpF2F1C15A47B64F045101B1AE5B4D6054" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filC342596B66E98254BB6E1CFFE50AE4AA" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\Microsoft.Practices.ServiceLocation.dll" />
+            </Component>
+            <Component Id="cmpC46009BA6A5B5F8DF9BEFCAD39146906" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil4E1754043F4A85422FD5FE1F7991ABCC" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\Microsoft.Practices.ServiceLocation.pdb" />
+            </Component>
+            <Component Id="cmp6B78BD7805E072190247D7503A0E7659" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil97C995578E25C0BCDEA9A9A8984D1772" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\Microsoft.Practices.ServiceLocation.xml" />
+            </Component>
+            <Component Id="cmpBC4FC00A26E7D32479D42D3411317FC5" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil90A8AAD9FC612906D405476D61CEA3F4" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\Newtonsoft.Json.dll" />
+            </Component>
+            <Component Id="cmp125C379E185231EFADA4CB4301BD0A9E" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil3A2F44A7730E98D18E0948B3261DFABD" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\Newtonsoft.Json.xml" />
+            </Component>
+            <Component Id="cmp0C02B03F271D69FF87C615C00C09CED8" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil55BCBAE6A6F48C0B864E3241DC559371" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\policy.2.0.taglib-sharp.config" />
+            </Component>
+            <Component Id="cmp8DB197CC057AC7C94619B4892024F92C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil358173B8DC9F7A3B1ABE4BE32E4DA9D0" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\policy.2.0.taglib-sharp.dll" />
+            </Component>
+            <Component Id="cmp6FD941A56CFB6288079AD725FC4C6CC9" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="filF62ABB9A1DBA3DB8EA89A66F6CDF9023" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\System.Net.Http.Formatting.dll" />
+            </Component>
+            <Component Id="cmpFEEE7919C5B2121D5C590DFC8C3AEB3F" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil6866E993A383A98854F8CAC32E9E1C07" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\System.Net.Http.Formatting.xml" />
+            </Component>
+            <Component Id="cmp017BFB3832A5B110A2B3A350E13F2A5C" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil17E34524E8398461D615894C92558FE9" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\System.Windows.Interactivity.dll" />
+            </Component>
+            <Component Id="cmp278E62245C5B0A0B8A6A38F03AFAF157" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil79CEBF2A3B2604BFFEE54F9D75DFEB94" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\System.Windows.Interactivity.xml" />
+            </Component>
+            <Component Id="cmp8841C0AC2F5771377A6D40464B9E9CA3" Directory="INSTALLFOLDER" Guid="*">
+                <File Id="fil4265412E257F04FE87688FAC0C4C5E7D" KeyPath="yes" Source="$(var.CoverFetcher.Net.TargetDir)\taglib-sharp.dll" />
+            </Component>
+        </ComponentGroup>
+    </Fragment>
+</Wix>
