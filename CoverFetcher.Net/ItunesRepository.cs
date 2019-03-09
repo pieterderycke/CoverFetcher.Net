@@ -19,8 +19,12 @@ namespace CoverFetcher
 
         public ItunesRepository()
         {
-            client = new HttpClient();
-            client.MaxResponseContentBufferSize = 1000000; // 1MB
+            HttpClientHandler clientHandler = new HttpClientHandler();
+            clientHandler.Proxy = null;
+            clientHandler.UseProxy = false;
+
+            client = new HttpClient(clientHandler);
+            //client.MaxResponseContentBufferSize = 1000000; // 1MB
 
             formatters = new MediaTypeFormatterCollection();
             formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/javascript"));

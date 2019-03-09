@@ -61,6 +61,9 @@ namespace CoverFetcher.ViewModels
         private BitmapImage cover;
         public BitmapImage Cover { get { return cover; } set { cover = value; RaisePropertyChanged("Cover"); } }
 
+        private SearchStatus status;
+        public SearchStatus Status { get { return status; } set { status = value; RaisePropertyChanged("Status"); } }
+        
         private string filePath;
         public string FilePath 
         { 
@@ -104,6 +107,11 @@ namespace CoverFetcher.ViewModels
         {
             try
             {
+                Application.Current.Dispatcher.Invoke((Action)(() =>
+                {
+                    Status = SearchStatus.Searching;
+                }));
+
                 itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist,
                     string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
                     {
@@ -114,8 +122,18 @@ namespace CoverFetcher.ViewModels
                             // Execute on UI Thread
                             Application.Current.Dispatcher.Invoke((Action)(() =>
                             {
-                                BitmapImage coverImage = (coverImageBytes != null) ? LoadImage(coverImageBytes) : null;
-                                Cover = coverImage;
+                                if (coverImageBytes != null)
+                                {
+                                    BitmapImage coverImage = LoadImage(coverImageBytes);
+
+                                    Cover = coverImage;
+                                    Status = SearchStatus.Found;
+                                }
+                                else
+                                {
+                                    Cover = null;
+                                    Status = SearchStatus.NotFound;
+                                }
                             }));
                         }
                         catch (AggregateException ex)

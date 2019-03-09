@@ -1,4 +1,4 @@
-SET version=0.1
+SET version=0.2
 
 msbuild /p:Configuration=Release CoverFetcher.Net\CoverFetcher.Net.csproj
 MKDIR zip
