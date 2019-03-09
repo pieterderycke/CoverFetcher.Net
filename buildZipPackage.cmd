@@ -1,6 +1,6 @@
 SET version=0.2
 
-msbuild /p:Configuration=Release CoverFetcher.Net\CoverFetcher.Net.csproj
+msbuild /p:Configuration=Release CoverFetcher.Net\CoverFetcher.Net.csproj /t:Clean;Rebuild
 MKDIR zip
 COPY CoverFetcher.Net\bin\Release\*.exe zip\
 COPY CoverFetcher.Net\bin\Release\*.dll zip\
