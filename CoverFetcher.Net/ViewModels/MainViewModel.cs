@@ -31,6 +31,15 @@ namespace CoverFetcher.ViewModels
             Save = new RelayCommand(UpdateTags);
             Cancel = new RelayCommand(ReadTags);
             SaveCover = new RelayCommand(WriteCoverToFile);
+
+            Countries = new[] {
+                new Country("United States", "US"),
+                new Country("United Kingdom", "UK"),
+                new Country("Belgium", "BE"),
+                new Country("Netherlands", "NL"),
+            };
+
+            SelectedCountry = Countries[2];
 	    }
 
         private string artist;
@@ -63,7 +72,12 @@ namespace CoverFetcher.ViewModels
 
         private SearchStatus status;
         public SearchStatus Status { get { return status; } set { status = value; RaisePropertyChanged("Status"); } }
-        
+
+        public IList<Country> Countries { get; private set; }
+
+        public Country SelectedCountry { get; set; }
+
+
         private string filePath;
         public string FilePath 
         { 
@@ -113,7 +127,7 @@ namespace CoverFetcher.ViewModels
                 }));
 
                 itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist,
-                    string.IsNullOrWhiteSpace(Album) ? Title : Album).ContinueWith(task =>
+                    string.IsNullOrWhiteSpace(Album) ? Title : Album, SelectedCountry.Code).ContinueWith(task =>
                     {
                         try
                         {

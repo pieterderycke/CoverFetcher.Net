@@ -70,11 +70,18 @@
         <Label Content="Track" HorizontalAlignment="Left" Margin="10,239,0,0" VerticalAlignment="Top"/>
         <Label Content="Disc" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Grid.Column="1" RenderTransformOrigin="0.263,0.5"/>
         <TextBox Height="23" Margin="60,243,0,0" TextWrapping="Wrap" Text="{Binding Track, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-        <TextBox Grid.Column="1" Height="23" Margin="57,243,0,0" TextWrapping="Wrap" Text="{Binding Disc, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" RenderTransformOrigin="0.242,0.435"/>
+        <TextBox Grid.Column="1" Height="23" Margin="57,243,0,0" TextWrapping="Wrap" Text="{Binding Disc, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <Label Content="Year" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top"/>
         <TextBox Height="23" Margin="60,274,0,0" TextWrapping="Wrap" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
         <Label Content="Genre" Grid.Column="1" HorizontalAlignment="Left" Margin="10,271,0,0" VerticalAlignment="Top"/>
         <ComboBox Grid.Column="1" Margin="57,274,0,0" VerticalAlignment="Top" Text="{Binding Genre, UpdateSourceTrigger=PropertyChanged}" IsEditable="True"/>
         <Button Content="Refresh" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Command="{Binding Refresh}"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,11" TextWrapping="Wrap" Text="Service:" Height="16" VerticalAlignment="Bottom"/>
+        <ComboBox VerticalAlignment="Bottom" Margin="60,0,0,10" SelectedIndex="0">
+            <ComboBoxItem Content="iTunes Search API"/>
+        </ComboBox>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="10,0,0,14" TextWrapping="Wrap" Text="Country:" VerticalAlignment="Bottom"/>
+        <ComboBox Grid.Column="1" Margin="64,0,0,10" VerticalAlignment="Bottom" ItemsSource="{Binding Countries}" SelectedItem="{Binding SelectedCountry}"/>
     </Grid>
 </Window>

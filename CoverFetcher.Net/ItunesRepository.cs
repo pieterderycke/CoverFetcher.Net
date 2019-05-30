@@ -30,12 +30,12 @@ namespace CoverFetcher
             formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/javascript"));
         }
 
-        public async Task<byte[]> FindCover(string artist, string album)
+        public async Task<byte[]> FindCover(string artist, string album, string countryCode)
         {
             try
             {
-                string url = string.Format("https://itunes.apple.com/search?entity=album&term={0}",
-                    Uri.EscapeDataString(artist + " " + album));
+                string url = string.Format("https://itunes.apple.com/search?entity=album&term={0}&country={1}",
+                    Uri.EscapeDataString(artist + " " + album), countryCode);
 
                 HttpResponseMessage response = await client.GetAsync(url);
                 SearchResult result = await response.Content.ReadAsAsync<SearchResult>(formatters);
