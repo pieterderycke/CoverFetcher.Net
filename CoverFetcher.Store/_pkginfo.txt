@@ -1,0 +1,1 @@
+C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0\CoverFetcher.Store_1.0.0.0_AnyCPU.appxbundle
