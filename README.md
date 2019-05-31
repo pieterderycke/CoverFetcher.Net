@@ -4,5 +4,5 @@ CoverFetcher.Net is a small tool that allows to easily find and embedded cover i
 ![Screenshot of CoverFetcher.Net](/screenshot.png)
 
 ## Privacy
-CoverFetcher does not collect and send any usage data. It only requires internet access to download new cover images.
+CoverFetcher does not collect any usage data and does not send any usage data. It only requires internet access to download new cover images.
 The full source of CoverFetcher is accessible on GitHub.
