@@ -17,12 +17,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Microsoft.Extensions.Configuration;
 
 namespace CoverFetcher.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
         private readonly ItunesRepository itunesRepository;
+        private readonly SettingsConfig settings;
 
         public MainViewModel ()
 	    {
@@ -40,6 +42,8 @@ namespace CoverFetcher.ViewModels
             };
 
             SelectedCountry = Countries[2];
+
+            settings = ((CoverFetcher.App)App.Current).Configuration.Get<SettingsConfig>();
 	    }
 
         private string artist;
@@ -221,7 +225,14 @@ namespace CoverFetcher.ViewModels
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.DefaultExt = ".jpg";
             dialog.Filter = "JPEG (.jpg)|*.jpg";
-            dialog.FileName = string.Format("{0} - {1}.jpg", (AlbumArtist != null) ? AlbumArtist : Artist, (Album != null) ? Album : Title);
+
+            string artist = (AlbumArtist != null) ? AlbumArtist : Artist;
+            string album = (Album != null) ? Album : Title;
+            string defaultFileName = settings.ExportSettings.DefaultFileNamePattern
+                .Replace("{artist}", artist)
+                .Replace("{album}", album);
+
+            dialog.FileName = defaultFileName;
             if (dialog.ShowDialog() == true)
             {
                 string filename = dialog.FileName;
