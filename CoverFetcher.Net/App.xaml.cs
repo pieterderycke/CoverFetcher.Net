@@ -39,7 +39,8 @@ namespace CoverFetcher
             this.Configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                     {
-                        {"ExportSettings:DefaultFileNamePattern", "{artist} - {album}.jpg"}
+                        {"ExportSettings:DefaultFileNamePattern", "{artist} - {album}.jpg"},
+                        {"ITunesSearch:DefaultCountry", "US"},
                     })
                 .AddJsonFile(path, optional: true)
                 .Build();

@@ -28,6 +28,8 @@ namespace CoverFetcher.ViewModels
 
         public MainViewModel ()
 	    {
+            settings = ((CoverFetcher.App)App.Current).Configuration.Get<SettingsConfig>();
+
             itunesRepository = new ItunesRepository();
             Refresh = new RelayCommand(LoadCover);
             Save = new RelayCommand(UpdateTags);
@@ -38,12 +40,12 @@ namespace CoverFetcher.ViewModels
                 new Country("United States", "US"),
                 new Country("United Kingdom", "UK"),
                 new Country("Belgium", "BE"),
+                new Country("France", "FR"),
+                new Country("Germany", "DE"),
                 new Country("Netherlands", "NL"),
             };
 
-            SelectedCountry = Countries[2];
-
-            settings = ((CoverFetcher.App)App.Current).Configuration.Get<SettingsConfig>();
+            SelectedCountry = Countries.FirstOrDefault(c => c.Code == settings?.ItunesSearch?.DefaultCountry) ?? Countries[0];
 	    }
 
         private string artist;
