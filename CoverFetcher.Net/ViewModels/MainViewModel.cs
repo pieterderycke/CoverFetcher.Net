@@ -18,6 +18,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
 namespace CoverFetcher.ViewModels
 {
@@ -31,7 +33,7 @@ namespace CoverFetcher.ViewModels
             settings = ((CoverFetcher.App)App.Current).Configuration.Get<SettingsConfig>();
 
             itunesRepository = new ItunesRepository();
-            Refresh = new RelayCommand(LoadCover);
+            Refresh = new RelayCommand(LoadCovers);
             Save = new RelayCommand(UpdateTags);
             Cancel = new RelayCommand(ReadTags);
             SaveCover = new RelayCommand(WriteCoverToFile);
@@ -46,7 +48,11 @@ namespace CoverFetcher.ViewModels
             };
 
             SelectedCountry = Countries.FirstOrDefault(c => c.Code == settings?.ItunesSearch?.DefaultCountry) ?? Countries[0];
-	    }
+
+            Covers = new ObservableCollection<BitmapImage>();
+
+            Status = SearchStatus.Initial;
+        }
 
         private string artist;
         public string Artist { get { return artist; } set { artist = value; RaisePropertyChanged("Artist"); } }
@@ -75,6 +81,8 @@ namespace CoverFetcher.ViewModels
         private byte[] coverImageBytes;
         private BitmapImage cover;
         public BitmapImage Cover { get { return cover; } set { cover = value; RaisePropertyChanged("Cover"); } }
+
+        public ObservableCollection<BitmapImage> Covers { get; private set; }
 
         private SearchStatus status;
         public SearchStatus Status { get { return status; } set { status = value; RaisePropertyChanged("Status"); } }
@@ -115,7 +123,7 @@ namespace CoverFetcher.ViewModels
                 Cover = null;
                 file.Dispose();
 
-                LoadCover();
+                LoadCovers();
             }
             catch(Exception ex)
             {
@@ -123,7 +131,7 @@ namespace CoverFetcher.ViewModels
             }
         }
 
-        private void LoadCover()
+        private void LoadCovers()
         {
             try
             {
@@ -132,21 +140,23 @@ namespace CoverFetcher.ViewModels
                     Status = SearchStatus.Searching;
                 }));
 
-                itunesRepository.FindCover(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist,
+                itunesRepository.FindCovers(string.IsNullOrWhiteSpace(AlbumArtist) ? Artist : AlbumArtist,
                     string.IsNullOrWhiteSpace(Album) ? Title : Album, SelectedCountry.Code).ContinueWith(task =>
                     {
                         try
                         {
-                            coverImageBytes = task.Result;
+                            IList<byte[]> coverImages = task.Result;
 
                             // Execute on UI Thread
                             Application.Current.Dispatcher.Invoke((Action)(() =>
                             {
-                                if (coverImageBytes != null)
+                                if (coverImages.Count > 0)
                                 {
-                                    BitmapImage coverImage = LoadImage(coverImageBytes);
+                                    Covers.Clear();
 
-                                    Cover = coverImage;
+                                    foreach (byte[] coverImageBytes in coverImages)
+                                        Covers.Add(LoadImage(coverImageBytes));
+
                                     Status = SearchStatus.Found;
                                 }
                                 else

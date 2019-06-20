@@ -30,7 +30,7 @@ namespace CoverFetcher
             formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/javascript"));
         }
 
-        public async Task<byte[]> FindCover(string artist, string album, string countryCode)
+        public async Task<IList<byte[]>> FindCovers(string artist, string album, string countryCode)
         {
             try
             {
@@ -40,15 +40,15 @@ namespace CoverFetcher
                 HttpResponseMessage response = await client.GetAsync(url);
                 SearchResult result = await response.Content.ReadAsAsync<SearchResult>(formatters);
 
-                if (result.ResultCount > 0)
+                IList<byte[]> covers = new List<byte[]>();
+
+                foreach (SearchResultItem resultItem in result.Items)
                 {
-                    string imageUrl = result.Items.First().ArtworkUrl600;
-                    return await client.GetByteArrayAsync(imageUrl);
+                    string imageUrl = resultItem.ArtworkUrl600;
+                    covers.Add(await client.GetByteArrayAsync(imageUrl));
                 }
-                else
-                {
-                    return null;
-                }
+
+                return covers;
             }
             catch(HttpRequestException ex)
             {

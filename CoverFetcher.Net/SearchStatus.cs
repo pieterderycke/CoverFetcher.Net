@@ -8,6 +8,6 @@ namespace CoverFetcher
 {
     public enum SearchStatus
     {
-        Found, NotFound, Searching
+        Initial, Found, NotFound, Searching
     }
 }
