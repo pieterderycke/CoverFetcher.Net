@@ -78,10 +78,13 @@ namespace CoverFetcher.ViewModels
         private string genre;
         public string Genre { get { return genre; } set { genre = value; RaisePropertyChanged("Genre"); } }
 
-        private byte[] coverImageBytes;
-        private BitmapImage cover;
-        public BitmapImage Cover { get { return cover; } set { cover = value; RaisePropertyChanged("Cover"); } }
+        private int position;
+        public int Position { get { return position; } set { position = value; RaisePropertyChanged("Position"); } }
 
+        private int resultCount;
+        public int ResultCount { get { return resultCount; } set { resultCount = value; RaisePropertyChanged("ResultCount"); } }
+
+        private IList<byte[]> coverImages;
         public ObservableCollection<BitmapImage> Covers { get; private set; }
 
         private SearchStatus status;
@@ -120,7 +123,6 @@ namespace CoverFetcher.ViewModels
                 Disc = "" + file.Tag.Disc;
                 Year = "" + file.Tag.Year;
                 Genre = file.Tag.FirstGenre;
-                Cover = null;
                 file.Dispose();
 
                 LoadCovers();
@@ -145,7 +147,7 @@ namespace CoverFetcher.ViewModels
                     {
                         try
                         {
-                            IList<byte[]> coverImages = task.Result;
+                            coverImages = task.Result;
 
                             // Execute on UI Thread
                             Application.Current.Dispatcher.Invoke((Action)(() =>
@@ -161,7 +163,6 @@ namespace CoverFetcher.ViewModels
                                 }
                                 else
                                 {
-                                    Cover = null;
                                     Status = SearchStatus.NotFound;
                                 }
                             }));
@@ -199,6 +200,8 @@ namespace CoverFetcher.ViewModels
             try
             {
                 TagLib.File file = TagLib.File.Create(filePath);
+
+                byte[] coverImageBytes = coverImages[Position];
 
                 if (coverImageBytes != null)
                 {
@@ -248,6 +251,7 @@ namespace CoverFetcher.ViewModels
             if (dialog.ShowDialog() == true)
             {
                 string filename = dialog.FileName;
+                byte[] coverImageBytes = coverImages[Position];
 
                 File.WriteAllBytes(filename, coverImageBytes);
             }

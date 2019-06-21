@@ -25,7 +25,7 @@ namespace CoverFetcher.Controls
     /// </summary>
     public partial class ImageCarousel : UserControl
     {
-        private int index;
+        //private int index;
         private List<ImageSource> images;
 
         public ImageCarousel()
@@ -41,6 +41,24 @@ namespace CoverFetcher.Controls
 
         public static readonly DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register("ItemsSource", typeof(IEnumerable), typeof(ImageCarousel), new PropertyMetadata(new PropertyChangedCallback(OnItemsSourcePropertyChanged)));
+
+        public int Position
+        {
+            get { return (int)GetValue(PositionProperty); }
+            set { SetValue(PositionProperty, value); }
+        }
+
+        public static readonly DependencyProperty PositionProperty =
+            DependencyProperty.Register("Position", typeof(int), typeof(ImageCarousel), new PropertyMetadata());
+
+        public int Count
+        {
+            get { return (int)GetValue(CountProperty); }
+            set { SetValue(CountProperty, value); }
+        }
+
+        public static readonly DependencyProperty CountProperty =
+            DependencyProperty.Register("Count", typeof(int), typeof(ImageCarousel), new PropertyMetadata());
 
         private static void OnItemsSourcePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -67,11 +85,13 @@ namespace CoverFetcher.Controls
             }
 
             images = new List<ImageSource>(newValue.OfType<ImageSource>());
+            Count = images.Count;
+
             if (images.Count > 0)
             {
-                index = 0;
+                Position = 0;
 
-                DisplayImage(images[index]);
+                DisplayImage(images[Position]);
 
                 if (images.Count > 1)
                 {
@@ -92,18 +112,20 @@ namespace CoverFetcher.Controls
 
                     if (images.Count == 1)
                     {
-                        index = 0;
-                        DisplayImage(images[index]);
+                        Position = 0;
+                        DisplayImage(images[Position]);
                     }
 
                     break;
                 case NotifyCollectionChangedAction.Reset:
                     images.Clear();
-                    index = 0;
+                    Position = 0;
                     DisplayImage(null);
 
                     break;
             }
+
+            Count = images.Count;
 
             if (images.Count > 1)
             {
@@ -129,8 +151,8 @@ namespace CoverFetcher.Controls
         {
             if (images?.Count > 0)
             {
-                index = (--index > -1) ? index : (images.Count - 1);
-                DisplayImage(images[index]);
+                Position = (--Position > -1) ? Position : (images.Count - 1);
+                DisplayImage(images[Position]);
             }
             else
                 image.Source = null;
@@ -140,8 +162,8 @@ namespace CoverFetcher.Controls
         {
             if (images?.Count > 0)
             {
-                index = (++index >= images.Count) ? 0 : index;
-                DisplayImage(images[index]);
+                Position = (++Position >= images.Count) ? 0 : Position;
+                DisplayImage(images[Position]);
             }
             else
                 image.Source = null;

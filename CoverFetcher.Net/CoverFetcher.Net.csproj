@@ -142,6 +142,7 @@
     <Compile Include="SearchStatus.cs" />
     <Compile Include="SearchStatusValueConverter.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="TitleValueConverter.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Page Include="Controls\ImageCarousel.xaml">
       <SubType>Designer</SubType>

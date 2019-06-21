@@ -3,15 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:CoverFetcher"
         xmlns:controls="clr-namespace:CoverFetcher.Controls"
-        Title="CoverFetcher" 
         Width="700" MinWidth="600"
         Height="400" MinHeight="400" MaxHeight="400"
         AllowDrop="True"
         Icon="Assets/Icon.ico">
-
     <Window.Resources>
         <local:SearchStatusValueConverter x:Key="searchStatusValueConverter"/>
+        <local:TitleValueConverter x:Key="titleValueConverter"/>
     </Window.Resources>
+
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource titleValueConverter}">
+            <Binding Path="Position"/>
+            <Binding Path="ResultCount"/>
+        </MultiBinding>
+    </Window.Title>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -28,7 +34,9 @@
         <Grid Grid.Column="2" Margin="10,10,10,0" Height="300" VerticalAlignment="Top">
             <controls:ImageCarousel x:Name="imageCarousel" 
                                     ItemsSource="{Binding Covers}" 
-                                    Visibility="{Binding Path=Status, Converter={StaticResource searchStatusValueConverter}, ConverterParameter=Found}">
+                                    Visibility="{Binding Path=Status, Converter={StaticResource searchStatusValueConverter}, ConverterParameter=Found}"
+                                    Position="{Binding Position, Mode=TwoWay}"
+                                    Count="{Binding ResultCount, Mode=TwoWay}">
                 <controls:ImageCarousel.ContextMenu>
                     <ContextMenu>
                         <MenuItem Header="Save As" Command="{Binding SaveCover}">
