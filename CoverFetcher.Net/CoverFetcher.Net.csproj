@@ -131,7 +131,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ByteArrayFileAbstraction.cs" />
-    <Compile Include="Controls\FontImageSource.cs" />
     <Compile Include="Controls\ImageCarousel.xaml.cs">
       <DependentUpon>ImageCarousel.xaml</DependentUpon>
     </Compile>
