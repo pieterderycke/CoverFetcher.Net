@@ -1,6 +1,6 @@
-MainPackage=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0_AnyCPU.appx
-SymbolPackage=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0\CoverFetcher.Store_1.0.0.0_AnyCPU.appxsym
-ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0_scale-100.appx
-ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0_scale-125.appx
-ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0_scale-150.appx
-ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.0.0_scale-400.appx
+MainPackage=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.1.0_AnyCPU.appx
+SymbolPackage=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.1.0\CoverFetcher.Store_1.0.1.0_AnyCPU.appxsym
+ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.1.0_scale-100.appx
+ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.1.0_scale-125.appx
+ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.1.0_scale-150.appx
+ResourcePack=C:\Users\Pieter\Documents\GitHub\CoverFetcher.Net\CoverFetcher.Store\bin\AnyCPU\Release\Upload\CoverFetcher.Store_1.0.1.0_scale-400.appx
