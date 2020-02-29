@@ -17,14 +17,14 @@
                 <ColumnDefinition Width="50"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid x:Name="backGrid" Grid.Column="0" MouseLeftButtonUp="OnBack" >
                 <Rectangle Fill="{fluent:AcrylicBrush image}" Width="50" Height="50"/>
-                <TextBlock x:Name="backButton" FontFamily="Segoe MDL2 Assets" Text="&#xE76B;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" MouseLeftButtonUp="OnBack" />
+                <TextBlock x:Name="backButton" FontFamily="Segoe MDL2 Assets" Text="&#xE76B;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" />
             </Grid>
 
-            <Grid Grid.Column="2">
+            <Grid x:Name="nextGrid" Grid.Column="2" MouseLeftButtonUp="OnNext" >
                 <Rectangle Fill="{fluent:AcrylicBrush image}" Width="50" Height="50"/>
-                <TextBlock x:Name="nextButton" FontFamily="Segoe MDL2 Assets" Text="&#xE76C;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35"  MouseLeftButtonUp="OnNext" />
+                <TextBlock x:Name="nextButton" FontFamily="Segoe MDL2 Assets" Text="&#xE76C;" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35"  />
             </Grid>
         </Grid>
 

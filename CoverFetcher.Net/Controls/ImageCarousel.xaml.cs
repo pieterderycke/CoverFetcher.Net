@@ -95,8 +95,8 @@ namespace CoverFetcher.Controls
 
                 if (images.Count > 1)
                 {
-                    backButton.Visibility = Visibility.Visible;
-                    nextButton.Visibility = Visibility.Visible;
+                    backGrid.Visibility = Visibility.Visible;
+                    nextGrid.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -129,13 +129,13 @@ namespace CoverFetcher.Controls
 
             if (images.Count > 1)
             {
-                backButton.Visibility = Visibility.Visible;
-                nextButton.Visibility = Visibility.Visible;
+                backGrid.Visibility = Visibility.Visible;
+                nextGrid.Visibility = Visibility.Visible;
             }
             else
             {
-                backButton.Visibility = Visibility.Hidden;
-                nextButton.Visibility = Visibility.Hidden;
+                backGrid.Visibility = Visibility.Hidden;
+                nextGrid.Visibility = Visibility.Hidden;
             }
         }
 
