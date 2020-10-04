@@ -1,201 +1,40 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{48F843C2-DE92-4C5D-BAF9-3120B58C672C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoverFetcher</RootNamespace>
-    <AssemblyName>CoverFetcher</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkProfile />
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>Pieter De Rycke</Authors>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>default</LangVersion>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Assets\Icon.ico</ApplicationIcon>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="FluentWPF, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentWPF.0.7.0\lib\net45\FluentWPF.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.Extras.WPF45">
-      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\GalaSoft.MvvmLight.Extras.WPF45.dll</HintPath>
-    </Reference>
-    <Reference Include="GalaSoft.MvvmLight.WPF45">
-      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\GalaSoft.MvvmLight.WPF45.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.2.4\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.FileExtensions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.FileExtensions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.FileExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Json, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Configuration.Json.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Configuration.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.FileProviders.Physical, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileProviders.Physical.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileProviders.Physical.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.FileSystemGlobbing, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.FileSystemGlobbing.2.2.0\lib\netstandard2.0\Microsoft.Extensions.FileSystemGlobbing.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="policy.2.0.taglib-sharp">
-      <HintPath>..\packages\taglib.2.1.0.0\lib\policy.2.0.taglib-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\MvvmLightLibs.4.2.30.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Xaml">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="taglib-sharp">
-      <HintPath>..\packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="WindowsBase" />
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <None Remove="Assets\icon-16.png" />
+    <None Remove="Assets\icon-24.png" />
+    <None Remove="Assets\icon-256.png" />
+    <None Remove="Assets\icon-32.png" />
+    <None Remove="Assets\icon-48.png" />
+    <None Remove="Assets\icon-64.png" />
+    <None Remove="Assets\Icon.ico" />
+    <None Remove="Assets\save.png" />
   </ItemGroup>
+
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="ByteArrayFileAbstraction.cs" />
-    <Compile Include="Controls\ImageCarousel.xaml.cs">
-      <DependentUpon>ImageCarousel.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Country.cs" />
-    <Compile Include="ItunesRepository.cs" />
-    <Compile Include="Messages\ShowErrorMessage.cs" />
-    <Compile Include="SearchResult.cs" />
-    <Compile Include="SearchResultItem.cs" />
-    <Compile Include="SearchStatus.cs" />
-    <Compile Include="SearchStatusValueConverter.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="TitleValueConverter.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Page Include="Controls\ImageCarousel.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
+    <PackageReference Include="FluentWPF" Version="0.8.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="3.1.8" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
+    <PackageReference Include="MvvmLight" Version="5.4.1.1" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
+    <PackageReference Include="TagLibSharp" Version="2.2.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <AppDesigner Include="Properties\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Icon.ico" />
-  </ItemGroup>
+
   <ItemGroup>
     <Resource Include="Assets\icon-16.png" />
     <Resource Include="Assets\icon-24.png" />
@@ -203,16 +42,8 @@
     <Resource Include="Assets\icon-32.png" />
     <Resource Include="Assets\icon-48.png" />
     <Resource Include="Assets\icon-64.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Assets\Icon.ico" />
+    <Resource Include="Assets\save.png" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
